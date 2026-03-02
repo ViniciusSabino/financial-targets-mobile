@@ -1,13 +1,12 @@
-import { View } from "react-native";
-import { useFonts } from "expo-font";
-import { useEffect } from "react";
-import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import {
   Montserrat_400Regular,
   Montserrat_800ExtraBold,
-} from "@expo-google-fonts/montserrat";
+} from '@expo-google-fonts/montserrat';
 
-import { DashboardScreen } from "../modules/dashboard/screens/DashboardScreen";
+import { RootNavigator } from './navigation/RootNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,9 +24,5 @@ export function App() {
 
   if (!loaded && !error) return null;
 
-  return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-      <DashboardScreen></DashboardScreen>
-    </View>
-  );
+  return <RootNavigator></RootNavigator>;
 }

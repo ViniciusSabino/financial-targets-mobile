@@ -1,5 +1,10 @@
 export const Routes = {
-  TARGET_LIST: "TargetList",
-  TARGET_CREATE: "TargetCreate",
-  LOGIN: "Login",
+  HOME: 'Home',
+  INCOMES: 'Incomes',
+  ESSENTIAL_OUTFLOWS: 'EssentialOutflows',
+  PLANNED_ALLOCATIONS: 'PlannedAllocations',
+  CREDIT_MANAGEMENT: 'CreditManagement',
+  SUBSCRIPTIONS: 'Subscriptions',
+  UNLIMITED_SPENDING: 'UnlimitedSpending',
+  CLOSING: 'Closing',
 };
