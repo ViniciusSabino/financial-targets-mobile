@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -24,5 +25,9 @@ export function App() {
 
   if (!loaded && !error) return null;
 
-  return <RootNavigator></RootNavigator>;
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <RootNavigator></RootNavigator>
+    </SafeAreaView>
+  );
 }

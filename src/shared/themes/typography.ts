@@ -1,6 +1,6 @@
 export const fonts = {
-  regular: 'MontserratRegular',
-  bold: 'MontserratBold',
+  regular: 'Montserrat_400Regular',
+  bold: 'Montserrat_800ExtraBold',
 };
 
 export const fontSizes = {
