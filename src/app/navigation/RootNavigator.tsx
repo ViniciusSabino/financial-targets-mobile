@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { Routes } from './routes';
 import { HomeScreen } from '@/modules/home/screens/HomeScreen';
@@ -58,7 +58,7 @@ export function RootNavigator() {
           options={{
             lazy: true,
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
+              <MaterialIcons name="home" size={size} color={color} />
             ),
           }}
         />
@@ -68,7 +68,7 @@ export function RootNavigator() {
           component={IncomesScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="arrow-down" size={size} color={color} />
+              <MaterialIcons name="arrow-downward" size={size} color={color} />
             ),
           }}
         ></Drawer.Screen>
@@ -78,7 +78,7 @@ export function RootNavigator() {
           component={EssentialOutflowScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="arrow-up" size={size} color={color} />
+              <MaterialIcons name="arrow-upward" size={size} color={color} />
             ),
           }}
         />
@@ -88,7 +88,7 @@ export function RootNavigator() {
           component={PlannedAllocationsScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="wallet" size={size} color={color} />
+              <MaterialIcons name="savings" size={size} color={color} />
             ),
           }}
         />
@@ -98,7 +98,7 @@ export function RootNavigator() {
           component={CreditManagementScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="card-sharp" size={size} color={color} />
+              <MaterialIcons name="credit-card" size={size} color={color} />
             ),
           }}
         />
@@ -108,7 +108,7 @@ export function RootNavigator() {
           component={SubscriptionsScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="laptop" size={size} color={color} />
+              <MaterialIcons name="shop" size={size} color={color} />
             ),
           }}
         />
@@ -118,7 +118,7 @@ export function RootNavigator() {
           component={UnlimitedSpendingScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="cart-sharp" size={size} color={color} />
+              <MaterialIcons name="shopping-cart" size={size} color={color} />
             ),
           }}
         />
@@ -128,7 +128,7 @@ export function RootNavigator() {
           component={ClosingScreen}
           options={{
             drawerIcon: ({ color, size }) => (
-              <Ionicons name="calculator" size={size} color={color} />
+              <MaterialIcons name="calculate" size={size} color={color} />
             ),
           }}
         />

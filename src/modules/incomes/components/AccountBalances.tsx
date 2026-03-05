@@ -1,23 +1,28 @@
 import { View, FlatList, Text } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from './AccountBalances.styles';
 import { Account, AccountBalancesProps } from '../types';
+import { Divider } from '@/shared/components/Divider';
 
 const AccountBalanceItem = ({ name, balance }: Account) => (
-  <View style={styles.accountBalanceItem}>
-    <Text style={styles.text}>{name}</Text>
-    <Text style={styles.text}>{balance}</Text>
+  <View style={styles.balance}>
+    <Text style={styles.balanceInfo}>{name}</Text>
+    <Text style={styles.balanceInfo}>{balance}</Text>
   </View>
 );
 
 export function AccountBalances(props: AccountBalancesProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Saldos Atuais ({props.accounts.length}{' '}
-        {props.accounts.length > 1 ? 'Contas' : 'Conta'})
-      </Text>
-      <View style={styles.balanceListContainer}>
+      <View style={styles.header}>
+        <MaterialIcons name="attach-money" style={styles.icons} />
+        <Text style={styles.title}>
+          Saldos Atuais - {props.accounts.length}{' '}
+          {props.accounts.length > 1 ? 'Contas' : 'Conta'} - R$ 0,00
+        </Text>
+      </View>
+      <View style={styles.body}>
         <FlatList
           horizontal={true}
           data={props.accounts}
@@ -31,6 +36,7 @@ export function AccountBalances(props: AccountBalancesProps) {
           keyExtractor={(item) => item.accountId}
         />
       </View>
+      <Divider />
     </View>
   );
 }

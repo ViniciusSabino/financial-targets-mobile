@@ -12,12 +12,12 @@ export const lightColors = {
 };
 
 export const darkColors = {
-  background: '#191919',
+  background: '#0f0f0f',
   surface: '#071517',
-  primary: '#B9C4BF',
-  textPrimary: '#DDDDDD',
+  primary: '#becac4',
+  textPrimary: '#e3e2e2',
   textSecondary: '#B9C4BF',
-  divider: '#2C2C2C',
+  divider: '#201f1f',
   success: '#2ECC71',
   error: '#E74C3C',
   warning: '#F39C12',
