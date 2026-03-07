@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: spacing.xs,
+    paddingTop: spacing.sm,
   },
   title: {
     color: darkColors.textPrimary,
@@ -27,9 +28,11 @@ export const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
+    marginTop: spacing.xs,
+    marginBottom: spacing.xs,
   },
   income: {
-    backgroundColor: darkColors.surface,
+    backgroundColor: darkColors.highlight,
     flexDirection: 'row',
     gap: spacing.xl,
     marginVertical: spacing.xs,

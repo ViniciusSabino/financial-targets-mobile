@@ -5,8 +5,8 @@ import { spacing, darkColors, fonts, fontSizes } from '@/shared/themes';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: spacing.sm,
   },
-
   title: {
     color: darkColors.textPrimary,
     fontFamily: fonts.bold,
@@ -14,5 +14,12 @@ export const styles = StyleSheet.create({
     margin: spacing.xs,
     textAlign: 'center',
     textTransform: 'uppercase',
+  },
+  body: { flexDirection: 'row', flex: 1 },
+  chartContainer: {
+    flex: 1,
+  },
+  chartLegendContainer: {
+    flex: 1,
   },
 });

@@ -97,15 +97,13 @@ export function CurrentIncomes() {
         <Text style={styles.headerText}>{COLUMN.amount}</Text>
         <Text style={styles.headerText}>{COLUMN.tipo}</Text>
       </View>
-      <ScrollView>
-        <View style={styles.body}>
-          <FlatList
-            data={DATA}
-            renderItem={({ item, index }) => <Income income={item} index={index} />}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.body}>
+        <FlatList
+          data={DATA}
+          renderItem={({ item, index }) => <Income income={item} index={index} />}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
       <Divider />
     </View>
   );
