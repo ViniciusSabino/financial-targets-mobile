@@ -24,8 +24,8 @@ export function AccountBalances(props: AccountBalancesProps) {
       </View>
       <View style={styles.body}>
         <FlatList
-          horizontal={true}
           data={props.accounts}
+          horizontal={true}
           renderItem={({ item }) => (
             <AccountBalanceItem
               name={item.name}
@@ -33,6 +33,7 @@ export function AccountBalances(props: AccountBalancesProps) {
               accountId={item.accountId}
             />
           )}
+          style={styles.balancesList}
           keyExtractor={(item) => item.accountId}
         />
       </View>

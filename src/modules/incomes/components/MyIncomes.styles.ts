@@ -6,11 +6,13 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+
   title: {
+    color: darkColors.textPrimary,
     fontFamily: fonts.bold,
     fontSize: fontSizes.body,
-    color: darkColors.textPrimary,
-    textAlign: 'center',
     margin: spacing.xs,
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
 });

@@ -2,10 +2,9 @@ import { View } from 'react-native';
 
 import { AccountBalances } from '../components/AccountBalances';
 import { CurrentIncomes } from '../components/CurrentIncomes';
-import { MyIncomes } from '../components/MyIncomes';
 import { styles } from './IncomesScreen.styles';
 import { useAccountBalances } from '../hooks/useAccountBalances';
-import { IncomesFooter } from '../components/IncomesFooter';
+import { MyIncomes } from '../components/MyIncomes';
 
 export function IncomesScreen() {
   const { accounts, isLoading, error } = useAccountBalances();
@@ -14,8 +13,7 @@ export function IncomesScreen() {
     <View style={styles.container}>
       <AccountBalances accounts={accounts} isLoading={isLoading} error={error} />
       <CurrentIncomes />
-      <MyIncomes />
-      <IncomesFooter />
+      <MyIncomes></MyIncomes>
     </View>
   );
 }

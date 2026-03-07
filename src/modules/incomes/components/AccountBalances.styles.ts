@@ -28,12 +28,14 @@ export const styles = StyleSheet.create({
   body: {
     alignItems: 'center',
   },
+  balancesList: {
+    paddingBottom: spacing.sm,
+  },
   balance: {
     alignItems: 'flex-start',
     marginVertical: spacing.xxs,
     paddingLeft: spacing.md,
     paddingRight: spacing.md,
-    paddingBottom: spacing.sm,
   },
   balanceInfo: {
     color: darkColors.primary,

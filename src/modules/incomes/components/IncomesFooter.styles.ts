@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 40,
     paddingBottom: 40,
+    backgroundColor: 'pink',
   },
   touchable: {
     backgroundColor: darkColors.surface,
