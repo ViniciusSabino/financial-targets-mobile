@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { darkColors, spacing } from '../themes';
+import { darkColors, spacing } from '@shared/themes';
 
 export const styles = StyleSheet.create({
   divider: {

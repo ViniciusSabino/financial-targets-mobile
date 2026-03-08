@@ -2,8 +2,7 @@ import { View, FlatList, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from './AccountBalances.styles';
-import { Account, AccountBalancesProps } from '../types';
-import { Divider } from '@/shared/components/Divider';
+import { Account, AccountBalancesProps } from './AccountBalances.types';
 
 const AccountBalanceItem = ({ name, balance }: Account) => (
   <View style={styles.balance}>
@@ -37,7 +36,6 @@ export function AccountBalances(props: AccountBalancesProps) {
           keyExtractor={(item) => item.accountId}
         />
       </View>
-      <Divider />
     </View>
   );
 }

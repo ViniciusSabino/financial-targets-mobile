@@ -1,7 +1,6 @@
-import { View, Text, ScrollView, FlatList, TouchableHighlight } from 'react-native';
+import { View, Text, FlatList, TouchableHighlight } from 'react-native';
 
 import { styles } from './CurrentIncomes.styles';
-import { Divider } from '@/shared/components/Divider';
 
 const Income = ({ income }: any) => (
   <TouchableHighlight onPress={() => alert('teste')}>
@@ -104,7 +103,6 @@ export function CurrentIncomes() {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <Divider />
     </View>
   );
 }

@@ -1,18 +1,15 @@
 import { View } from 'react-native';
 
 import { styles } from './IncomesScreen.styles';
-import { useAccountBalances } from '../hooks/useAccountBalances';
-import { EstimatedReleases } from '../components/EstimatesReleases';
-import { AccountBalances } from '../components/AccountBalances';
-import { CurrentIncomes } from '../components/CurrentIncomes';
+import { EstimatedReleases } from '../components/EstimatedReleases/EstimatedReleases';
+import { CurrentIncomes } from '../components/CurrentIncomes/CurrentIncomes';
+import { Divider } from '@shared/components/Divider/Divider';
 
 export function IncomesScreen() {
-  const { accounts, isLoading, error } = useAccountBalances();
-
   return (
     <View style={styles.container}>
-      <AccountBalances accounts={accounts} isLoading={isLoading} error={error} />
       <CurrentIncomes />
+      <Divider />
       <EstimatedReleases />
     </View>
   );
