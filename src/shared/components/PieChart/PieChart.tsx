@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 
 import { DEVICE } from '@/shared/constants/device';
 import { styles } from './PieChart.styles';
-import { PieChartDataInfo, PieChartProps } from './PieChart.types';
+import { PieChartLegend, PieChartProps } from './PieChart.types';
 import { chartColors, chartDefaultConfig } from './PieChart.constants';
+import { PercentageUtil } from '@/shared/utils/percentage.util';
 
 export function PieChart<A>(props: PieChartProps<A>) {
   const [data, setData] = useState([] as Array<A>);
@@ -21,16 +22,23 @@ export function PieChart<A>(props: PieChartProps<A>) {
     return chartData;
   };
 
-  const getPierChartInfo = (data: Array<any>): Array<PieChartDataInfo> => {
-    return data.map((d) => ({
-      info: d[props.legendField],
-      color: d.color,
-    }));
+  const getPierChartLegend = (data: Array<any>): Array<PieChartLegend> => {
+    const total = data.reduce((acc, item) => acc + item[props.accessor], 0);
+
+    return data
+      .map((d) => ({
+        label: d[props.legendField],
+        color: d.color,
+        value: d[props.accessor],
+        percentage: `${PercentageUtil.calculatePercentage(d[props.accessor], total)}`,
+      }))
+      .sort((a, b) => b.value - a.value);
   };
 
   useEffect(() => {
     const chartData = renderData(props.data);
-    props.getPierChartInfo(getPierChartInfo(chartData));
+    console.log(chartData);
+    props.getPierChartLegend(getPierChartLegend(chartData));
   }, []);
 
   return (
@@ -45,7 +53,6 @@ export function PieChart<A>(props: PieChartProps<A>) {
       accessor={props.accessor}
       backgroundColor={styles.chart.backgroundColor}
       paddingLeft={'0'}
-      absolute
       hasLegend={false}
       center={[55, 0]}
     />

@@ -1,9 +1,12 @@
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { useState } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from './EstimatedReleases.styles';
 import { PieChart } from '@/shared/components/PieChart/PieChart';
-import { PieChartDataInfo } from '@/shared/components/PieChart/PieChart.types';
+import { PieChartLegend } from '@/shared/components/PieChart/PieChart.types';
 import { Release } from './EstimatedReleases.types';
+import { AmountUtil } from '@/shared/utils/amount.util';
 
 const data: Array<Release> = [
   {
@@ -29,6 +32,8 @@ const data: Array<Release> = [
 ];
 
 export function EstimatedReleases() {
+  const [pieChartLegend, setPieChartLegend] = useState([] as Array<PieChartLegend>);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Lançamentos Estimados do Mês</Text>
@@ -39,12 +44,44 @@ export function EstimatedReleases() {
             accessor="amount"
             height={255}
             legendField="name"
-            getPierChartInfo={(pieChartDataInfo: Array<PieChartDataInfo>) => {
-              console.log(pieChartDataInfo);
+            getPierChartLegend={(pieChartLegend: Array<PieChartLegend>) => {
+              setPieChartLegend(pieChartLegend);
             }}
           ></PieChart>
         </View>
-        <View style={styles.chartLegendContainer}></View>
+        <FlatList
+          scrollEnabled={false}
+          data={pieChartLegend}
+          renderItem={({ item }) => (
+            <View style={styles.legendRow} key={item.label}>
+              <View style={styles.legendColorBody}>
+                <MaterialIcons name="circle" size={28} color={item.color} />
+              </View>
+              <View style={styles.legendItemBody}>
+                <Text style={styles.legendText}>{item.percentage}</Text>
+              </View>
+              <View style={styles.legendItemBody}>
+                <Text style={styles.legendText}>
+                  {AmountUtil.formatAmount(item.value)}
+                  {''}
+                </Text>
+              </View>
+              <View style={styles.legendItemBody}>
+                <Text style={styles.legendText}>{item.label}</Text>
+              </View>
+            </View>
+          )}
+        ></FlatList>
+        <View style={styles.footer}>
+          <Text style={styles.totalText}>
+            Estimado para Março:{' '}
+            {AmountUtil.formatAmount(
+              pieChartLegend.reduce((acc, item) => {
+                return acc + item.value;
+              }, 0),
+            )}
+          </Text>
+        </View>
       </View>
     </View>
   );

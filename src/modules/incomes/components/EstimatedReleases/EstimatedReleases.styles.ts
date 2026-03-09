@@ -4,7 +4,7 @@ import { spacing, darkColors, fonts, fontSizes } from '@/shared/themes';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     paddingTop: spacing.sm,
   },
   title: {
@@ -15,11 +15,36 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
   },
-  body: { flexDirection: 'row', flex: 1 },
+  body: {},
   chartContainer: {
+    alignItems: 'center',
+  },
+  legendRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    paddingBottom: spacing.sm,
+  },
+  legendColorBody: {
+    alignItems: 'center',
+    backgroundColor: darkColors.highlight,
     flex: 1,
   },
-  chartLegendContainer: {
+  legendItemBody: {
+    backgroundColor: darkColors.highlight,
     flex: 1,
+  },
+  legendText: {
+    color: darkColors.primary,
+    fontSize: fontSizes.body,
+    paddingTop: spacing.xs,
+  },
+  footer: {
+    padding: spacing.sm,
+  },
+  totalText: {
+    color: darkColors.primary,
+    fontFamily: fonts.regular,
+    fontSize: fontSizes.body,
+    textAlign: 'center',
   },
 });
