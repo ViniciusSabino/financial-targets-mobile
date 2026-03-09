@@ -37,7 +37,6 @@ export function PieChart<A>(props: PieChartProps<A>) {
 
   useEffect(() => {
     const chartData = renderData(props.data);
-    console.log(chartData);
     props.getPierChartLegend(getPierChartLegend(chartData));
   }, []);
 
