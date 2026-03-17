@@ -5,15 +5,28 @@ import { EstimatedReleases } from '../components/EstimatedReleases/EstimatedRele
 import { CurrentIncomes } from '../components/CurrentIncomes/CurrentIncomes';
 import { Divider } from '@shared/components/Divider/Divider';
 import { useCurrentIncomes } from '../hooks/useCurrentIncomes';
+import { useSummaryIncomes } from '../hooks/useSummaryIncomes';
 
 export function IncomesScreen() {
-  const { incomes, isLoading, error } = useCurrentIncomes();
+  const { incomes, isLoadingCurrentIncomes, useCurrentIncomesError } =
+    useCurrentIncomes();
+
+  const { summaryIncomes, isLoadingSummary, useSummaryIncomesError } =
+    useSummaryIncomes();
 
   return (
     <View style={styles.container}>
-      <CurrentIncomes incomes={incomes} isLoading={isLoading} error={error} />
+      <CurrentIncomes
+        incomes={incomes}
+        isLoading={isLoadingCurrentIncomes}
+        error={useCurrentIncomesError}
+      />
       <Divider />
-      <EstimatedReleases />
+      <EstimatedReleases
+        summaryIncomes={summaryIncomes}
+        isLoading={isLoadingSummary}
+        error={useSummaryIncomesError}
+      />
     </View>
   );
 }

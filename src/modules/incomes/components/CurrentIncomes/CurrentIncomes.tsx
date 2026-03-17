@@ -8,8 +8,34 @@ import {
 
 import { styles } from './CurrentIncomes.styles';
 import { CurrentIncomesColumns, IncomeStatus } from './CurrentIncomes.constants';
-import { CurrentIncomesProps } from './CurrentIncomes.types';
+import { CurrentIncomesProps, Income } from './CurrentIncomes.types';
 import { darkColors } from '@/shared/themes';
+
+const renderLoading = () => (
+  <ActivityIndicator size={'large'} color={darkColors.primary} style={styles.loading} />
+);
+
+const renderCurrentIncomesList = (incomes: Income[]) => (
+  <FlatList
+    data={incomes.filter((i) => i.status == IncomeStatus.RECEIVED)}
+    renderItem={({ item }) => (
+      <TouchableHighlight onPress={() => alert('teste')}>
+        <View style={styles.row}>
+          <View style={styles.income}>
+            <Text style={styles.incomeText}>{item.date}</Text>
+          </View>
+          <View style={styles.income}>
+            <Text style={styles.incomeText}>{item.amount}</Text>
+          </View>
+          <View style={styles.income}>
+            <Text style={styles.incomeText}>{item.type}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    )}
+    keyExtractor={(item) => item.id.toString()}
+  />
+);
 
 export function CurrentIncomes(props: CurrentIncomesProps) {
   return (
@@ -27,33 +53,7 @@ export function CurrentIncomes(props: CurrentIncomesProps) {
         </View>
       </View>
       <View style={styles.body}>
-        {props.isLoading ? (
-          <ActivityIndicator
-            size={'large'}
-            color={darkColors.primary}
-            style={styles.loading}
-          />
-        ) : (
-          <FlatList
-            data={props.incomes.filter((i) => i.status == IncomeStatus.RECEIVED)}
-            renderItem={({ item }) => (
-              <TouchableHighlight onPress={() => alert('teste')}>
-                <View style={styles.row}>
-                  <View style={styles.income}>
-                    <Text style={styles.incomeText}>{item.date}</Text>
-                  </View>
-                  <View style={styles.income}>
-                    <Text style={styles.incomeText}>{item.amount}</Text>
-                  </View>
-                  <View style={styles.income}>
-                    <Text style={styles.incomeText}>{item.type}</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        )}
+        {props.isLoading ? renderLoading() : renderCurrentIncomesList(props.incomes)}
       </View>
     </View>
   );

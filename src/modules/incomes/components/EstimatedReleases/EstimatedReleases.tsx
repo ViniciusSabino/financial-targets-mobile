@@ -1,83 +1,71 @@
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from './EstimatedReleases.styles';
 import { PieChart } from '@/shared/components/PieChart/PieChart';
 import { PieChartLegend } from '@/shared/components/PieChart/PieChart.types';
-import { Release } from './EstimatedReleases.types';
+import { EstimatedReleasesProps, SummaryPerType } from './EstimatedReleases.types';
 import { AmountUtil } from '@/shared/utils/amount.util';
+import { darkColors } from '@/shared/themes';
 
-const data: Array<Release> = [
-  {
-    name: 'Salário',
-    amount: 8000,
-  },
-  {
-    name: 'Freelancer',
-    amount: 1000,
-  },
-  {
-    name: 'Décimo',
-    amount: 7000,
-  },
-  {
-    name: 'PLR',
-    amount: 500,
-  },
-  {
-    name: 'Outros',
-    amount: 2000,
-  },
-];
+const renderLoading = () => (
+  <ActivityIndicator size={'large'} color={darkColors.primary} style={styles.loading} />
+);
 
-export function EstimatedReleases() {
+export function EstimatedReleases(props: EstimatedReleasesProps) {
   const [pieChartLegend, setPieChartLegend] = useState([] as Array<PieChartLegend>);
+
+  const { summaryIncomes, isLoading, error } = props;
+
+  const renderEstimatedReleases = (summariesPerType: SummaryPerType[]) => (
+    <>
+      <View style={styles.chartContainer}>
+        <PieChart<SummaryPerType>
+          data={summariesPerType}
+          accessor="amount"
+          height={255}
+          legendField="type"
+          getPierChartLegend={(pieChartLegend: Array<PieChartLegend>) => {
+            setPieChartLegend(pieChartLegend);
+          }}
+        ></PieChart>
+      </View>
+      <FlatList
+        data={pieChartLegend}
+        renderItem={({ item }) => (
+          <View style={styles.legendRow} key={item.label}>
+            <View style={styles.legendColorBody}>
+              <MaterialIcons name="circle" size={28} color={item.color} />
+            </View>
+            <View style={styles.legendItemBody}>
+              <Text style={styles.legendText}>{item.percentage}</Text>
+            </View>
+            <View style={styles.legendItemBody}>
+              <Text style={styles.legendText}>
+                {AmountUtil.formatAmount(item.value)}
+                {''}
+              </Text>
+            </View>
+            <View style={styles.legendItemBody}>
+              <Text style={styles.legendText}>{item.label}</Text>
+            </View>
+          </View>
+        )}
+      ></FlatList>
+    </>
+  );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lançamentos Estimados do Mês</Text>
+      <Text style={styles.title}>Total Estimado para o Mês</Text>
       <Text style={styles.totalText}>
-        {AmountUtil.formatAmount(
-          pieChartLegend.reduce((acc, item) => {
-            return acc + item.value;
-          }, 0),
-        )}
+        {AmountUtil.formatAmount(summaryIncomes.totalExpected)}
       </Text>
       <View>
-        <View style={styles.chartContainer}>
-          <PieChart<Release>
-            data={data}
-            accessor="amount"
-            height={255}
-            legendField="name"
-            getPierChartLegend={(pieChartLegend: Array<PieChartLegend>) => {
-              setPieChartLegend(pieChartLegend);
-            }}
-          ></PieChart>
-        </View>
-        <FlatList
-          data={pieChartLegend}
-          renderItem={({ item }) => (
-            <View style={styles.legendRow} key={item.label}>
-              <View style={styles.legendColorBody}>
-                <MaterialIcons name="circle" size={28} color={item.color} />
-              </View>
-              <View style={styles.legendItemBody}>
-                <Text style={styles.legendText}>{item.percentage}</Text>
-              </View>
-              <View style={styles.legendItemBody}>
-                <Text style={styles.legendText}>
-                  {AmountUtil.formatAmount(item.value)}
-                  {''}
-                </Text>
-              </View>
-              <View style={styles.legendItemBody}>
-                <Text style={styles.legendText}>{item.label}</Text>
-              </View>
-            </View>
-          )}
-        ></FlatList>
+        {isLoading
+          ? renderLoading()
+          : renderEstimatedReleases(summaryIncomes.summariesPerType)}
       </View>
     </View>
   );

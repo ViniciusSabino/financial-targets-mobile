@@ -1,15 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { IncomeResponse } from '../schemas/income.schema';
+import { IncomeListSchema } from '../schemas/income.schema';
 import incomesService from '@/core/api/incomesService';
+import { Income } from '../components/CurrentIncomes/CurrentIncomes.types';
 
 export const useCurrentIncomes = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['incomes'],
-    queryFn: () => incomesService.getCurrentIncomes('03', '2026').then((r) => r.data),
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['currentIncomes'],
+    queryFn: () =>
+      incomesService
+        .getCurrentIncomes('03', '2026')
+        .then((r) => IncomeListSchema.parse(r.data))
+        .catch((err) => console.log(err)),
   });
 
-  const incomes = data as IncomeResponse[];
+  const incomes = data as Income[];
 
-  return { incomes, isLoading, isError, error };
+  return { incomes, isLoadingCurrentIncomes: isLoading, useCurrentIncomesError: error };
 };

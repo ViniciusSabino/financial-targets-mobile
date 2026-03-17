@@ -45,4 +45,8 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.body,
     paddingTop: spacing.xs,
   },
+  loading: {
+    alignItems: 'center',
+    flex: 1,
+  },
 });

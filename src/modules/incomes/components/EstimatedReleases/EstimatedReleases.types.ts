@@ -1,6 +1,17 @@
-type Release = {
-  name: string;
-  amount: number;
+import z from 'zod';
+
+import {
+  IncomesSummarySchema,
+  summaryPerType,
+} from '../../schemas/summaryIncomes.schema';
+
+type EstimatedReleasesProps = {
+  summaryIncomes: SummaryIncomes;
+  isLoading: boolean;
+  error: Error | null;
 };
 
-export type { Release };
+type SummaryIncomes = z.infer<typeof IncomesSummarySchema>;
+type SummaryPerType = z.infer<typeof summaryPerType>;
+
+export type { SummaryIncomes, SummaryPerType, EstimatedReleasesProps };
