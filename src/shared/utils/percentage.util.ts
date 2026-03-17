@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js';
 
 export class PercentageUtil {
-  static calculatePercentage(value: number, total: number): string {
+  static calculatePercentage = (value: number, total: number): string => {
     if (total == null || value == null) {
       return '0%';
     }
@@ -17,8 +17,8 @@ export class PercentageUtil {
       decimalValue
         .dividedBy(decimalTotal)
         .times(100)
-        .toDecimalPlaces(2, Decimal.ROUND_HALF_UP)
+        .toDecimalPlaces(0, Decimal.ROUND_HALF_UP)
         .toString() + '%'
     );
-  }
+  };
 }

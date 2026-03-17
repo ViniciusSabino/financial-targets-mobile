@@ -36,9 +36,13 @@ export const styles = StyleSheet.create({
     backgroundColor: darkColors.highlight,
     flex: 1,
   },
-  legendItemBody: {
+  legendPercentageBody: {
     backgroundColor: darkColors.highlight,
     flex: 1,
+  },
+  legendItemBody: {
+    backgroundColor: darkColors.highlight,
+    flex: 2,
   },
   legendText: {
     color: darkColors.primary,

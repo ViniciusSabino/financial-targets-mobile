@@ -10,6 +10,8 @@ import { styles } from './CurrentIncomes.styles';
 import { CurrentIncomesColumns, IncomeStatus } from './CurrentIncomes.constants';
 import { CurrentIncomesProps, Income } from './CurrentIncomes.types';
 import { darkColors } from '@/shared/themes';
+import { AmountUtil } from '@/shared/utils/amount.util';
+import { DateUtil } from '@/shared/utils/date.util';
 
 const renderLoading = () => (
   <ActivityIndicator size={'large'} color={darkColors.primary} style={styles.loading} />
@@ -17,15 +19,15 @@ const renderLoading = () => (
 
 const renderCurrentIncomesList = (incomes: Income[]) => (
   <FlatList
-    data={incomes.filter((i) => i.status == IncomeStatus.RECEIVED)}
+    data={incomes}
     renderItem={({ item }) => (
       <TouchableHighlight onPress={() => alert('teste')}>
         <View style={styles.row}>
           <View style={styles.income}>
-            <Text style={styles.incomeText}>{item.date}</Text>
+            <Text style={styles.incomeText}>{DateUtil.formatISODateToBR(item.date)}</Text>
           </View>
           <View style={styles.income}>
-            <Text style={styles.incomeText}>{item.amount}</Text>
+            <Text style={styles.incomeText}>{AmountUtil.formatAmount(item.amount)}</Text>
           </View>
           <View style={styles.income}>
             <Text style={styles.incomeText}>{item.type}</Text>

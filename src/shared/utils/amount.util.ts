@@ -1,7 +1,7 @@
 import Decimal from 'decimal.js';
 
 export class AmountUtil {
-  static formatAmount(amount: number | null | undefined): string {
+  static formatAmount = (amount: number | null | undefined): string => {
     if (amount == null) return 'R$ 0,00';
 
     const decimal = new Decimal(amount);
@@ -14,5 +14,5 @@ export class AmountUtil {
     const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
     return `R$ ${formattedInteger},${decimalPart || '00'}`;
-  }
+  };
 }

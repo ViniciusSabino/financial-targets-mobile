@@ -16,7 +16,7 @@ const renderLoading = () => (
 export function EstimatedReleases(props: EstimatedReleasesProps) {
   const [pieChartLegend, setPieChartLegend] = useState([] as Array<PieChartLegend>);
 
-  const { summaryIncomes, isLoading, error } = props;
+  const { summaryIncomes, isLoading } = props;
 
   const renderEstimatedReleases = (summariesPerType: SummaryPerType[]) => (
     <>
@@ -38,7 +38,7 @@ export function EstimatedReleases(props: EstimatedReleasesProps) {
             <View style={styles.legendColorBody}>
               <MaterialIcons name="circle" size={28} color={item.color} />
             </View>
-            <View style={styles.legendItemBody}>
+            <View style={styles.legendPercentageBody}>
               <Text style={styles.legendText}>{item.percentage}</Text>
             </View>
             <View style={styles.legendItemBody}>
@@ -60,13 +60,13 @@ export function EstimatedReleases(props: EstimatedReleasesProps) {
     <View style={styles.container}>
       <Text style={styles.title}>Total Estimado para o Mês</Text>
       <Text style={styles.totalText}>
-        {AmountUtil.formatAmount(summaryIncomes.totalExpected)}
-      </Text>
-      <View>
         {isLoading
-          ? renderLoading()
-          : renderEstimatedReleases(summaryIncomes.summariesPerType)}
-      </View>
+          ? AmountUtil.formatAmount(0)
+          : AmountUtil.formatAmount(summaryIncomes.totalExpected)}
+      </Text>
+      {isLoading
+        ? renderLoading()
+        : renderEstimatedReleases(summaryIncomes.summariesPerType)}
     </View>
   );
 }

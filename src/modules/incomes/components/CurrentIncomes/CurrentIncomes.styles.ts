@@ -20,8 +20,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   header: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
+    marginRight: spacing.lg,
   },
   headerText: {
     color: darkColors.textSecondary,
@@ -33,11 +34,11 @@ export const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    gap: spacing.sm,
   },
   income: {
     alignItems: 'center',
     flex: 1,
+    marginRight: spacing.lg,
     paddingBottom: 10,
     paddingTop: 10,
   },
