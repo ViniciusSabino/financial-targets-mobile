@@ -12,22 +12,32 @@ import { CurrentIncomesProps, Income } from './CurrentIncomes.types';
 import { darkColors } from '@/shared/themes';
 import { AmountUtil } from '@/shared/utils/amount.util';
 import { DateUtil } from '@/shared/utils/date.util';
+import { useIncomesScreenStore } from '../../screens/IncomesScreenStore';
 
 const renderLoading = () => (
   <ActivityIndicator size={'large'} color={darkColors.primary} style={styles.loading} />
 );
 
-const renderCurrentIncomesList = (incomes: Income[]) => (
+const renderCurrentIncomesList = (
+  incomes: Income[],
+  setModalIncomeVisible: React.Dispatch<React.SetStateAction<boolean>>,
+  setCurrentIncomeDetails: (income: Income) => void,
+) => (
   <FlatList
     data={incomes}
     renderItem={({ item }) => {
       const isFutureIncome = DateUtil.isFutureDate(item.date);
 
       return (
-        <TouchableHighlight onPress={() => alert('teste')}>
+        <TouchableHighlight
+          onPress={() => {
+            setCurrentIncomeDetails(item);
+            setModalIncomeVisible(true);
+          }}
+        >
           <View style={styles.row}>
             <View style={styles.income}>
-              <Text style={isFutureIncome ? styles.futureIncomeText : styles.incomeText}>
+              <Text style={styles.incomeText}>
                 {DateUtil.formatISODateToBR(item.date)}{' '}
                 {isFutureIncome && `(${DateUtil.diffInDays(item.date)}d)`}
               </Text>
@@ -49,6 +59,12 @@ const renderCurrentIncomesList = (incomes: Income[]) => (
 );
 
 export function CurrentIncomes(props: CurrentIncomesProps) {
+  const { incomes, isLoading, setModalIncomeVisible } = props;
+
+  const setCurrentIncomeDetails = useIncomesScreenStore(
+    (state) => state.setCurrentIncomeDetails,
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Entradas de Março</Text>
@@ -64,7 +80,13 @@ export function CurrentIncomes(props: CurrentIncomesProps) {
         </View>
       </View>
       <View style={styles.body}>
-        {props.isLoading ? renderLoading() : renderCurrentIncomesList(props.incomes)}
+        {isLoading
+          ? renderLoading()
+          : renderCurrentIncomesList(
+              incomes,
+              setModalIncomeVisible,
+              setCurrentIncomeDetails,
+            )}
       </View>
     </View>
   );

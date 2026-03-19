@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { DEVICE } from '@/shared/constants/device';
 import { styles } from './PieChart.styles';
-import { PieChartLegend, PieChartProps } from './PieChart.types';
+import { ChartData, PieChartProps } from './PieChart.types';
 import { chartColors, chartDefaultConfig } from './PieChart.constants';
 import { PercentageUtil } from '@/shared/utils/percentage.util';
 
@@ -22,7 +22,7 @@ export function PieChart<A>(props: PieChartProps<A>) {
     return chartData;
   };
 
-  const getPierChartLegend = (data: Array<any>): Array<PieChartLegend> => {
+  const getPierChartData = (data: Array<any>): Array<ChartData> => {
     const total = data.reduce((acc, item) => acc + item[props.accessor], 0);
 
     return data
@@ -37,7 +37,7 @@ export function PieChart<A>(props: PieChartProps<A>) {
 
   useEffect(() => {
     const chartData = renderData(props.data);
-    props.getPierChartLegend(getPierChartLegend(chartData));
+    props.getPierChartData(getPierChartData(chartData));
   }, []);
 
   return (

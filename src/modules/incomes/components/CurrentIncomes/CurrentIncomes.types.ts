@@ -10,6 +10,7 @@ type CurrentIncomesProps = {
   incomes: Array<Income>;
   isLoading: boolean;
   error: Error | null;
+  setModalIncomeVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type Income = z.infer<typeof IncomeSchema>;

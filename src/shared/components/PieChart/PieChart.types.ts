@@ -3,7 +3,7 @@ type PieChartConfig = {
   legendFontSize: number;
 };
 
-type ChartLegend = {
+type ChartData = {
   label: string;
   color: string;
   value: number;
@@ -15,7 +15,7 @@ type PieChartProps<A> = {
   accessor: string;
   height: number;
   legendField: string;
-  getPierChartLegend: (pieChartInfo: Array<ChartLegend>) => void;
+  getPierChartData: (pieChartInfo: Array<ChartData>) => void;
 };
 
-export type { PieChartConfig, PieChartProps, ChartLegend };
+export type { PieChartConfig, PieChartProps, ChartData };
