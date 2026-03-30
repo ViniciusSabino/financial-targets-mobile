@@ -8,4 +8,8 @@ type ModalIncomeDetailsProps = {
   setModalIncomeVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export type { ModalIncomeDetailsProps };
+type ModalIncomeDetailsBodyProps = {
+  currentIncome: Income | null;
+};
+
+export type { ModalIncomeDetailsProps, ModalIncomeDetailsBodyProps };

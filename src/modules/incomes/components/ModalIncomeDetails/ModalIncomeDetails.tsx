@@ -1,22 +1,10 @@
-import {
-  Modal,
-  Pressable,
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Platform,
-  Keyboard,
-  TextInput,
-  Switch,
-} from 'react-native';
+import { Modal, Pressable, View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { ModalIncomeDetailsProps } from './ModalIncomeDetails.types';
 import { createStyle } from './ModalIncomeDetails.styles';
 import { darkColors } from '@/shared/themes';
-import { AmountUtil } from '@/shared/utils/amount.util';
-import { useState } from 'react';
+import { ModalIncomeDetailsBody } from './ModalIncomeDetailsBody';
 
 const renderIncomeTypeIcon = (incomeType: string | undefined) =>
   new Map([
@@ -34,10 +22,6 @@ export function ModalIncomeDetails(props: ModalIncomeDetailsProps) {
 
   const currentTypeChartData = incomeTypeChartData.find((income) => income.label == currentIncome?.type);
 
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
   const styles = createStyle(currentTypeChartData);
 
   return (
@@ -54,59 +38,18 @@ export function ModalIncomeDetails(props: ModalIncomeDetailsProps) {
         <View style={styles.centeredView}>
           <View style={styles.modal}>
             <View style={styles.header}>
-              <View style={styles.categoryHeader}></View>
+              <View style={styles.categoryColor}></View>
               <View style={styles.categoryTextContent}>
                 {renderIncomeTypeIcon(currentIncome?.type)}
                 <Text style={styles.categoryText}>{currentIncome?.type}</Text>
               </View>
             </View>
             <View style={styles.body}>
-              <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <View style={styles.inputArea}>
-                  <Text style={styles.textInputLabel}>Recebido</Text>
-                  <Switch
-                    trackColor={{ false: '#767577', true: '#81b0ff' }}
-                    thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                  />
-                </View>
-                <View style={styles.inputArea}>
-                  <Text style={styles.textInputLabel}>Valor</Text>
-                  <TextInput
-                    placeholder="Valor"
-                    inputMode="decimal"
-                    style={styles.textInput}
-                    value={AmountUtil.formatAmount(currentIncome?.amount)}
-                  />
-                </View>
-                <View style={styles.inputArea}>
-                  <Text style={styles.textInputLabel}>Data</Text>
-                  <TextInput placeholder="Data" style={styles.textInput} value={currentIncome?.date} />
-                </View>
-                <View style={styles.inputArea}>
-                  <Text style={styles.textInputLabel}>Conta</Text>
-                  <TextInput placeholder="Conta" style={styles.textInput} value={currentIncome?.accountName} />
-                </View>
-                <View style={styles.inputArea}>
-                  <Text style={styles.textInputLabel}>Tipo</Text>
-                  <TextInput placeholder="Recorrência" style={styles.textInput} value={currentIncome?.recurrence} />
-                </View>
-                <View style={{ ...styles.inputArea }}>
-                  <Text style={styles.textInputLabel}>Descrição</Text>
-                  <TextInput
-                    multiline={true}
-                    placeholder="Descrição"
-                    style={styles.textInput}
-                    value={currentIncome?.description || ''}
-                  />
-                </View>
-              </KeyboardAvoidingView>
+              <ModalIncomeDetailsBody currentIncome={currentIncome} />
             </View>
             <View style={styles.footer}>
               <View style={styles.buttonSave}>
-                <Text style={styles.textSave}>Confirmar Alterações</Text>
+                <Text style={styles.textSave}>Salvar Alterações</Text>
               </View>
               <Pressable style={styles.buttonClose} onPress={() => setModalIncomeVisible(!modalIncomeVisible)}>
                 <MaterialIcons name="close" size={35} color={darkColors.primary} />

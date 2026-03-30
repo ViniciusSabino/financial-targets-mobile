@@ -31,14 +31,14 @@ export const createStyle = (currentIncomeTypeChartData: ChartData | undefined) =
       flexDirection: 'column',
       height: 80,
     },
-    categoryHeader: {
+    categoryColor: {
       backgroundColor: currentIncomeTypeChartData?.color,
-      height: 20,
+      height: 10,
     },
     categoryTextContent: {
       alignContent: 'center',
       flexDirection: 'row',
-      gap: spacing.md,
+      gap: spacing.xs,
       justifyContent: 'center',
       paddingTop: spacing.md,
     },
@@ -51,27 +51,6 @@ export const createStyle = (currentIncomeTypeChartData: ChartData | undefined) =
     body: {
       alignSelf: 'stretch',
       flex: 1,
-    },
-    inputArea: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      gap: spacing.lg,
-      paddingBottom: spacing.md,
-      paddingLeft: spacing.md,
-      paddingRight: spacing.md,
-    },
-    textInputLabel: {
-      color: darkColors.primary,
-      fontFamily: fonts.regular,
-      fontSize: fontSizes.body,
-    },
-    textInput: {
-      borderColor: darkColors.divider,
-      borderBottomWidth: 2,
-      color: darkColors.textPrimary,
-      flex: 1,
-      fontFamily: fonts.regular,
-      fontSize: fontSizes.body,
     },
     footer: {
       alignSelf: 'stretch',
