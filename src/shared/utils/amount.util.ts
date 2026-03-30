@@ -15,4 +15,14 @@ export class AmountUtil {
 
     return `R$ ${formattedInteger},${decimalPart || '00'}`;
   };
+
+  static parseAmount = (amount: string | null | undefined): number => {
+    if (!amount) return 0;
+
+    const cleaned = amount.replace('R$', '').replace(/\./g, '').replace(',', '.').trim();
+
+    const parsed = parseFloat(cleaned);
+
+    return parsed;
+  };
 }

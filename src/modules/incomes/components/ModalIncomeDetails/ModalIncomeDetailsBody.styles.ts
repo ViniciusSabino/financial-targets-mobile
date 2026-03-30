@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSizes.body,
   },
   textInput: {
-    borderColor: darkColors.background,
+    borderColor: darkColors.divider,
     borderBottomWidth: 2,
     color: darkColors.textPrimary,
     flex: 1,
