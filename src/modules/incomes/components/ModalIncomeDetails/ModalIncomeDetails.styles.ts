@@ -13,7 +13,6 @@ export const createStyle = (currentIncomeTypeChartData: ChartData | undefined) =
     modal: {
       alignItems: 'center',
       backgroundColor: darkColors.highlight,
-      borderRadius: 20,
       flexDirection: 'column',
       elevation: 5,
       height: '45%',
@@ -62,12 +61,13 @@ export const createStyle = (currentIncomeTypeChartData: ChartData | undefined) =
       fontSize: fontSizes.body,
     },
     buttonSave: {
+      backgroundColor: darkColors.background,
       flex: 1,
       justifyContent: 'center',
       paddingLeft: spacing.md,
     },
     buttonClose: {
+      backgroundColor: '#3D2B2B',
       padding: spacing.sm,
-      paddingRight: spacing.md,
     },
   });
